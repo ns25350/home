@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ns25350 | Cyber Portfolio</title>
+<title>ns25350 | ANBY MODE</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -13,6 +13,13 @@ body{
     background:#0a0a0f;
     color:white;
     overflow-x:hidden;
+    cursor:none;
+}
+
+/* ===== アンビーカラー ===== */
+:root{
+    --anby-blue:#00E5FF;
+    --anby-yellow:#FFD803;
 }
 
 /* ===== 背景アニメ ===== */
@@ -21,14 +28,15 @@ body::before{
     position:fixed;
     width:200%;
     height:200%;
-    background:radial-gradient(circle at 30% 30%, #00f0ff22, transparent 60%),
-               radial-gradient(circle at 70% 70%, #ff00ff22, transparent 60%);
-    animation:bgMove 10s linear infinite alternate;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(0,229,255,0.15), transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(255,216,3,0.12), transparent 60%);
+    animation:bgMove 12s linear infinite alternate;
     z-index:-1;
 }
 @keyframes bgMove{
     from{transform:translate(0,0);}
-    to{transform:translate(-10%, -10%);}
+    to{transform:translate(-8%, -8%);}
 }
 
 /* ===== Loader ===== */
@@ -46,7 +54,7 @@ body::before{
 .loader-text{
     font-size:clamp(24px,5vw,40px);
     font-weight:900;
-    color:#00f0ff;
+    color:var(--anby-blue);
     animation:glitch 1s infinite;
 }
 .loader-bar{
@@ -54,16 +62,16 @@ body::before{
     width:200px;height:3px;background:#222;overflow:hidden;
 }
 .loader-bar span{
-    display:block;height:100%;width:0;background:#00f0ff;
+    display:block;height:100%;width:0;background:var(--anby-yellow);
     animation:load 2s forwards;
 }
 @keyframes load{to{width:100%;}}
 @keyframes glitch{
-    0%{text-shadow:2px 0 #00f0ff;}
-    25%{text-shadow:-2px 0 #ff00ff;}
-    50%{text-shadow:2px 0 #00f0ff;}
-    75%{text-shadow:-2px 0 #ff00ff;}
-    100%{text-shadow:2px 0 #00f0ff;}
+    0%{text-shadow:2px 0 var(--anby-blue);}
+    25%{text-shadow:-2px 0 var(--anby-yellow);}
+    50%{text-shadow:2px 0 var(--anby-blue);}
+    75%{text-shadow:-2px 0 var(--anby-yellow);}
+    100%{text-shadow:2px 0 var(--anby-blue);}
 }
 
 /* ===== Nav ===== */
@@ -73,20 +81,18 @@ nav{
     display:flex;justify-content:space-between;align-items:center;
     background:rgba(10,10,15,0.6);
     backdrop-filter:blur(10px);
-    border-bottom:1px solid #00f0ff44;
+    border-bottom:1px solid rgba(0,229,255,0.3);
     transition:0.3s;
     z-index:1000;
 }
 nav.scrolled{
     background:#0a0a0f;
-    border-bottom:1px solid #00f0ff;
+    border-bottom:1px solid var(--anby-blue);
 }
-nav h1{color:#00f0ff;}
-nav ul{
-    list-style:none;display:flex;gap:30px;
-}
-nav a{text-decoration:none;color:white;font-size:14px;}
-nav a:hover{color:#00f0ff;}
+nav h1{color:var(--anby-blue);}
+nav ul{list-style:none;display:flex;gap:30px;}
+nav a{text-decoration:none;color:white;font-size:14px;transition:0.3s;}
+nav a:hover{color:var(--anby-yellow);}
 
 /* ===== ハンバーガー ===== */
 .menu-toggle{
@@ -96,7 +102,20 @@ nav a:hover{color:#00f0ff;}
     cursor:pointer;
 }
 .menu-toggle span{
-    width:25px;height:3px;background:#00f0ff;
+    width:25px;height:3px;background:var(--anby-blue);
+}
+@media(max-width:768px){
+    nav ul{
+        position:absolute;
+        top:60px;right:0;
+        background:#0a0a0f;
+        flex-direction:column;
+        width:200px;
+        padding:20px;
+        display:none;
+    }
+    nav ul.active{display:flex;}
+    .menu-toggle{display:flex;}
 }
 
 /* ===== Hero ===== */
@@ -110,23 +129,21 @@ nav a:hover{color:#00f0ff;}
     font-size:clamp(36px,10vw,80px);
 }
 .hero span{
-    color:#00f0ff;
-    text-shadow:0 0 20px #00f0ff;
+    color:var(--anby-blue);
+    text-shadow:0 0 20px var(--anby-blue);
 }
 
 /* ===== Section ===== */
-.section{
-    padding:120px 8%;
-}
+.section{padding:120px 8%;}
 .section h3{
     font-size:clamp(24px,5vw,40px);
     margin-bottom:40px;
-    color:#00f0ff;
-    border-left:4px solid #00f0ff;
+    color:var(--anby-blue);
+    border-left:4px solid var(--anby-blue);
     padding-left:20px;
 }
 
-/* ===== Works Grid ===== */
+/* ===== Grid ===== */
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -135,13 +152,13 @@ nav a:hover{color:#00f0ff;}
 .card{
     background:#111118;
     padding:30px;
-    border:1px solid #00f0ff33;
+    border:1px solid rgba(0,229,255,0.3);
     transition:0.3s;
 }
 .card:hover{
     transform:translateY(-8px);
-    border-color:#00f0ff;
-    box-shadow:0 0 25px #00f0ff66;
+    border-color:var(--anby-yellow);
+    box-shadow:0 0 25px rgba(255,216,3,0.6);
 }
 
 /* ===== Scroll Animation ===== */
@@ -159,30 +176,33 @@ nav a:hover{color:#00f0ff;}
 footer{
     text-align:center;
     padding:40px;
-    border-top:1px solid #00f0ff33;
+    border-top:1px solid rgba(0,229,255,0.3);
     color:#888;
 }
 
-/* ===== Mobile ===== */
-@media(max-width:768px){
-    nav ul{
-        position:absolute;
-        top:60px;right:0;
-        background:#0a0a0f;
-        flex-direction:column;
-        width:200px;
-        padding:20px;
-        display:none;
-    }
-    nav ul.active{display:flex;}
-    .menu-toggle{display:flex;}
+/* ===== Mouse Follower ===== */
+.cursor{
+    position:fixed;
+    top:0;left:0;
+    width:18px;height:18px;
+    border-radius:50%;
+    pointer-events:none;
+    background:rgba(0,229,255,0.15);
+    border:2px solid var(--anby-blue);
+    box-shadow:0 0 15px var(--anby-blue);
+    transform:translate(-50%,-50%);
+    z-index:9999;
+}
+.cursor.active{
+    border-color:var(--anby-yellow);
+    box-shadow:0 0 25px var(--anby-yellow);
 }
 </style>
 </head>
 <body>
 
 <div id="loader">
-    <div class="loader-text">ns25350 SYSTEM</div>
+    <div class="loader-text">ANBY SYSTEM</div>
     <div class="loader-bar"><span></span></div>
 </div>
 
@@ -204,7 +224,7 @@ footer{
 
 <section class="section hidden" id="about">
     <h3>ABOUT</h3>
-    <div class="card">Cyber Creative Developer.</div>
+    <div class="card">Anby Inspired Cyber Portfolio.</div>
 </section>
 
 <section class="section hidden" id="works">
@@ -225,7 +245,10 @@ footer{
 © 2026 ns25350 All Rights Reserved.
 </footer>
 
+<div class="cursor" id="cursor"></div>
+
 <script>
+/* Loader */
 window.addEventListener("load",()=>{
     setTimeout(()=>{
         document.getElementById("loader").style.display="none";
@@ -233,12 +256,43 @@ window.addEventListener("load",()=>{
     },2000);
 });
 
+/* Scroll Nav */
 window.addEventListener("scroll",()=>{
     document.querySelector("nav").classList.toggle("scrolled",window.scrollY>50);
 });
 
+/* Mobile Menu */
 function toggleMenu(){
     document.getElementById("menu").classList.toggle("active");
+}
+
+/* Mouse Follower */
+const cursor=document.getElementById("cursor");
+let mouseX=0,mouseY=0,currentX=0,currentY=0;
+
+window.addEventListener("mousemove",e=>{
+    mouseX=e.clientX;
+    mouseY=e.clientY;
+});
+
+function animate(){
+    currentX+=(mouseX-currentX)*0.15;
+    currentY+=(mouseY-currentY)*0.15;
+    cursor.style.left=currentX+"px";
+    cursor.style.top=currentY+"px";
+    requestAnimationFrame(animate);
+}
+animate();
+
+document.querySelectorAll("a,.card").forEach(el=>{
+    el.addEventListener("mouseenter",()=>cursor.classList.add("active"));
+    el.addEventListener("mouseleave",()=>cursor.classList.remove("active"));
+});
+
+/* スマホはカーソル無効 */
+if(window.matchMedia("(max-width:768px)").matches){
+    cursor.style.display="none";
+    document.body.style.cursor="default";
 }
 </script>
 
