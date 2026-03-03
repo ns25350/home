@@ -21,6 +21,66 @@ body {
     overflow-x: hidden;
 }
 
+/* ===== ローディング画面 ===== */
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #0a0a0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    flex-direction: column;
+}
+
+.loader-text {
+    font-size: 40px;
+    font-weight: 900;
+    color: #00f0ff;
+    animation: glitch 1s infinite;
+}
+
+.loader-bar {
+    margin-top: 20px;
+    width: 200px;
+    height: 3px;
+    background: #222;
+    overflow: hidden;
+}
+
+.loader-bar span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: #00f0ff;
+    animation: load 2s forwards;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 0 #00f0ff; }
+    25% { text-shadow: -2px 0 #ff00ff; }
+    50% { text-shadow: 2px 0 #00f0ff; }
+    75% { text-shadow: -2px 0 #ff00ff; }
+    100% { text-shadow: 2px 0 #00f0ff; }
+}
+
+/* ===== 初期非表示 ===== */
+.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 1s ease;
+}
+
 /* ===== ナビ ===== */
 nav {
     position: fixed;
@@ -34,28 +94,10 @@ nav {
     background: rgba(10,10,15,0.6);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #00f0ff44;
-    z-index: 1000;
 }
 
 nav h1 {
     font-weight: 900;
-    letter-spacing: 2px;
-    color: #00f0ff;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 40px;
-}
-
-nav a {
-    text-decoration: none;
-    color: white;
-    transition: 0.3s;
-}
-
-nav a:hover {
     color: #00f0ff;
 }
 
@@ -65,72 +107,21 @@ nav a:hover {
     display: flex;
     align-items: center;
     padding-left: 10%;
-    position: relative;
-}
-
-.hero::before {
-    content: "";
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, #00f0ff33, transparent 70%);
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
 }
 
 .hero h2 {
     font-size: 80px;
     font-weight: 900;
-    line-height: 1.1;
 }
 
-.hero h2 span {
+.hero span {
     color: #00f0ff;
-}
-
-.hero p {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #cccccc;
-    letter-spacing: 2px;
-}
-
-.button {
-    margin-top: 40px;
-    padding: 15px 40px;
-    border: 2px solid #00f0ff;
-    color: #00f0ff;
-    background: transparent;
-    cursor: pointer;
-    font-weight: 700;
-    letter-spacing: 2px;
-    transition: 0.3s;
-}
-
-.button:hover {
-    background: #00f0ff;
-    color: black;
-    box-shadow: 0 0 20px #00f0ff;
+    text-shadow: 0 0 15px #00f0ff;
 }
 
 /* ===== セクション ===== */
 .section {
     padding: 120px 10%;
-}
-
-.section h3 {
-    font-size: 40px;
-    margin-bottom: 40px;
-    color: #00f0ff;
-    border-left: 4px solid #00f0ff;
-    padding-left: 20px;
 }
 
 .card {
@@ -142,66 +133,46 @@ nav a:hover {
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    box-shadow: 0 0 20px #00f0ff55;
     border-color: #00f0ff;
-    box-shadow: 0 0 20px #00f0ff22;
-}
-
-footer {
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid #00f0ff22;
-    color: #888;
 }
 </style>
 </head>
 <body>
 
-<nav>
+<div id="loader">
+    <div class="loader-text">ns25350 SYSTEM</div>
+    <div class="loader-bar"><span></span></div>
+</div>
+
+<nav class="hidden">
     <h1>ns25350</h1>
-    <ul>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#works">WORKS</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-    </ul>
 </nav>
 
-<section class="hero">
-    <div class="hero-content">
-        <h2>HELLO.<br>I'm <span>ns25350</span></h2>
-        <p>Creative Developer / Cyber Style Designer</p>
-        <button class="button">ENTER PROFILE</button>
+<section class="hero hidden">
+    <h2>HELLO.<br>I'm <span>ns25350</span></h2>
+</section>
+
+<section class="section hidden">
+    <div class="card">
+        Cyber Style Portfolio Site.
     </div>
 </section>
 
-<section class="section" id="about">
-    <h3>ABOUT</h3>
-    <div class="card">
-        <p>未来志向のデザインとテクノロジーを融合させた制作を行っています。
-        サイバーで洗練されたUIを得意としています。</p>
-    </div>
-</section>
+<script>
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
 
-<section class="section" id="works">
-    <h3>WORKS</h3>
-    <div class="card">
-        <p>・Web Design Project 01</p>
-    </div>
-    <div class="card">
-        <p>・Interactive UI Project 02</p>
-    </div>
-</section>
+        document.querySelectorAll(".hidden").forEach((el, i) => {
+            setTimeout(() => {
+                el.classList.add("show");
+            }, i * 300);
+        });
 
-<section class="section" id="contact">
-    <h3>CONTACT</h3>
-    <div class="card">
-        <p>Email: ns25350@example.com</p>
-    </div>
-</section>
-
-<footer>
-    © 2026 ns25350 All Rights Reserved.
-</footer>
+    }, 2000);
+});
+</script>
 
 </body>
 </html>
